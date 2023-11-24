@@ -45,7 +45,5 @@ public class Main {
         devDept.addEmployee(dev2);
         devDept.addEmployee(test1);
         System.out.println(devDept);
-        //System.out.println(test1.hashCode());
-        //System.out.println(test1.equals(test3));
     }
 }
