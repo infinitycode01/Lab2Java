@@ -106,7 +106,7 @@ public class Employee {
      */
     public static class Builder {
         private final String name;
-        private int id;
+        private final int id;
         private final String position;
         private final double salary;
 
