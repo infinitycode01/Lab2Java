@@ -10,15 +10,15 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-public class JsonSerializationFormatTest {
+public class JsonSerializationDeserializationIOTest {
 
-    private JsonSerializationFormat<Employee> format;
+    private JsonSerializationDeserializationIO<Employee> format;
     private List<Employee> employees;
     private final String testFilePath = "test_employees.json";
 
     @BeforeClass
     public void setUp() {
-        format = new JsonSerializationFormat<>(Employee.class);
+        format = new JsonSerializationDeserializationIO<>(Employee.class);
         employees = Arrays.asList(
                 new Employee.Builder("Dima", 1, "HR", 1000)
                         .build(),

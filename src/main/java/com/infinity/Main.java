@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         try {
-            XmlSerializationFormat<Employee> format = new XmlSerializationFormat<>(Employee.class);
+            XmlSerializationDeserializationIO<Employee> format = new XmlSerializationDeserializationIO<>(Employee.class);
 
             // Створення об'єкта Employee
             Employee employee = new Employee.Builder("John Doe", 1, "Developer", 60000).build();

@@ -9,12 +9,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonSerializationFormat<T> implements SerializationFormat<T> {
+public class JsonSerializationDeserializationIO<T> implements SerializationFormat<T> {
 
     private final Gson gson;
     private final Type typeOfT;
 
-    public JsonSerializationFormat(Type typeOfT) {
+    public JsonSerializationDeserializationIO(Type typeOfT) {
         this.gson = new GsonBuilder().setPrettyPrinting().create();
         this.typeOfT = typeOfT;
     }

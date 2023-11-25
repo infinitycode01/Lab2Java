@@ -5,15 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-public class XmlSerializationFormat<T> implements SerializationFormat<T> {
+public class XmlSerializationDeserializationIO<T> implements SerializationFormat<T> {
 
     private final XmlMapper xmlMapper;
     private final Class<T> typeParameterClass;
 
-    public XmlSerializationFormat(Class<T> typeParameterClass) {
+    public XmlSerializationDeserializationIO(Class<T> typeParameterClass) {
         this.xmlMapper = new XmlMapper();
         this.typeParameterClass = typeParameterClass;
     }

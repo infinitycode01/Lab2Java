@@ -82,19 +82,28 @@ public class Employee {
     }
 
     /**
+     * Deserialize the string representation of the employee into an Employee object.
+     *
+     * @param str The string to deserialize.
+     * @return An Employee object.
+     */
+    public static Employee fromString(String str) {
+        String[] parts = str.split(",");
+        Builder builder = new Builder(parts[0], Integer.parseInt(parts[1].trim()), parts[2], Double.parseDouble(parts[3].trim()));
+        return new Employee(builder);
+    }
+
+
+    /**
      * Provides a string representation of the Employee object.
      *
      * @return A string representation of the Employee.
      */
     @Override
     public String toString() {
-        return "\nEmployee {" +
-                "name = '" + name + '\'' +
-                ", id = " + id +
-                ", position = '" + position + '\'' +
-                ", salary = " + salary +
-                '}';
+        return name + "," + id + "," + position + "," + salary;
     }
+
 
     /**
      * Compares this employee with the specified object for equality.

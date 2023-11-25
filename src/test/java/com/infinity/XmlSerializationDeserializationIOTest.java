@@ -10,15 +10,15 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-public class XmlSerializationFormatTest {
+public class XmlSerializationDeserializationIOTest {
 
-    private XmlSerializationFormat<Employee> xmlFormat;
+    private XmlSerializationDeserializationIO<Employee> xmlFormat;
     private Employee employee;
     private String testFilePath = "test_employee.xml";
 
     @BeforeClass
     public void setUp() {
-        xmlFormat = new XmlSerializationFormat<>(Employee.class);
+        xmlFormat = new XmlSerializationDeserializationIO<>(Employee.class);
         employee = new Employee.Builder("Dima", 1, "Java", 60000).build();
     }
 
@@ -35,7 +35,7 @@ public class XmlSerializationFormatTest {
 
     @Test
     public void testWriteToFileAndReadFromFile() throws IOException {
-        List<Employee> employees = Arrays.asList(employee, new Employee.Builder("Jane Smith", 2, "java", 80000).build());
+        List<Employee> employees = Arrays.asList(employee, new Employee.Builder("Dima", 2, "java", 80000).build());
         xmlFormat.writeToFile(employees, testFilePath);
 
         Assert.assertTrue(Files.exists(Paths.get(testFilePath)));
