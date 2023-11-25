@@ -47,14 +47,14 @@ public class Developer extends Employee {
      */
     @Override
     public String toString() {
-        return "\nDeveloper {" +
+        return "Developer {" +
                 "name = '" + getName() + '\'' +
                 ", id = " + getId() +
                 ", position = '" + getPosition() + '\'' +
                 ", salary = " + getSalary() +
                 ", programmingLanguages  = " + Arrays.toString(programmingLanguages) +
                 ", currentProject = '" + currentProject + '\'' +
-                '}';
+                '}' + "\n";
     }
 
     /**
