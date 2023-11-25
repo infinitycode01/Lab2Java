@@ -2,9 +2,33 @@ package com.infinity;
 
 public class Main {
     public static void main(String[] args) {
+        Developer dev1 = new Developer.Builder("Dima", 1, "Junior Java Spring", 1000.0)
+                .setProgrammingLanguages(new String[]{"Java", "C++"})
+                .setCurrentProject("Project X")
+                .build();
 
-        System.out.println("Hello");
+        Developer dev2 = new Developer.Builder("Dima", 2, "Middle Java Spring", 2000.0)
+                .setProgrammingLanguages(new String[]{"Java", "C++", "Python"})
+                .setCurrentProject("Project X")
+                .build();
 
+        Tester test1 = new Tester.Builder("Dima", 3, "Junior QA Engeenier", 600.0)
+                .setTypesOfTesting(new String[]{"Manual"})
+                .setCurrentProject("Project X")
+                .build();
+
+        DevelopmentDepartment devDep = new DevelopmentDepartment.Builder()
+                .setName("Development")
+                .build();
+
+        devDep.addEmployee(dev1);
+        devDep.addEmployee(dev2);
+        devDep.addEmployee(test1);
+
+        System.out.println(devDep);
+
+//        System.out.println("Hello");
+//
 //        Developer dev1, dev2, dev3;
 //        Tester test1, test2, test3;
 //        dev1 = new Developer.Builder("Dima", -1, "Junior Java Software Developer", 1000.0)
