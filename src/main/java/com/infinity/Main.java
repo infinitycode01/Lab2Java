@@ -1,29 +1,40 @@
 package com.infinity;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        JsonSerializationFormat<Developer> developerFormat = new JsonSerializationFormat<>(Developer.class);
+    public static void main(String[] args) {
+        try {
+            XmlSerializationFormat<Employee> format = new XmlSerializationFormat<>(Employee.class);
 
-        // Example serialization
-        Developer dev1 = new Developer.Builder("Dima", 1, "Junior Java", 1200)
-                .setProgrammingLanguages(new String[]{"Java"})
-                .setCurrentProject("Project X")
-                .build();
-        String json = developerFormat.serialize(dev1);
+            // Створення об'єкта Employee
+            Employee employee = new Employee.Builder("John Doe", 1, "Developer", 60000).build();
 
-        // Example deserialization
-        Developer deserializedEmployee = developerFormat.deserialize(json);
+            // Серіалізація об'єкта в XML
+            String xml = format.serialize(employee);
+            System.out.println("Serialized XML:\n" + xml);
 
-        System.out.println(deserializedEmployee);
+            // Десеріалізація об'єкта з XML
+            Employee deserializedEmployee = format.deserialize(xml);
+            System.out.println("Deserialized Employee:\n" + deserializedEmployee);
 
-        // File operations
-        List<Developer> dev = new ArrayList<>();
-        dev.add(dev1);
-        developerFormat.writeToFile(dev, "employees.json");
-        List<Developer> readEmployees = developerFormat.readFromFile("employees.json");
+            // Запис об'єктів у файл
+            List<Employee> employees = Arrays.asList(employee, new Employee.Builder("Jane Smith", 2, "Manager", 80000).build());
+            String filePath = "employees.xml";
+            format.writeToFile(employees, filePath);
+            System.out.println("Employees written to file: " + filePath);
+
+            // Читання об'єктів з файлу
+            List<Employee> readEmployees = format.readFromFile(filePath);
+            System.out.println("Employees read from file:");
+            for (Employee emp : readEmployees) {
+                System.out.println(emp);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

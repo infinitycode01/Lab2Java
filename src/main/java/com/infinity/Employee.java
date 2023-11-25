@@ -6,11 +6,14 @@ import java.util.Objects;
  * Represents an employee with specific attributes like name, ID, position, and salary.
  */
 public class Employee {
-    private final String name;
-    private final int id;
-    private final String position;
-    private final double salary;
+    private String name;
+    private int id;
+    private String position;
+    private double salary;
 
+
+    public Employee() {
+    }
     /**
      * Constructs an Employee instance with the specified attributes.
      *
@@ -22,6 +25,25 @@ public class Employee {
         this.position = builder.position;
         this.salary = builder.salary;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+
+
 
     /**
      * Returns the name of the employee.
