@@ -1,5 +1,9 @@
-package com.infinity;
+package com.infinity.servicesTest;
 
+import com.infinity.Department;
+import com.infinity.DevelopmentDepartment;
+import com.infinity.Employee;
+import com.infinity.services.DepartmentServiceStreamApi;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;

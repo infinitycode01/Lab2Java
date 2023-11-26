@@ -1,4 +1,8 @@
-package com.infinity;
+package com.infinity.services;
+
+import com.infinity.Department;
+import com.infinity.DevelopmentDepartment;
+import com.infinity.Employee;
 
 import java.util.ArrayList;
 import java.util.Comparator;

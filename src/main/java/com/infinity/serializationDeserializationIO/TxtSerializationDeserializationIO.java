@@ -1,4 +1,4 @@
-package com.infinity;
+package com.infinity.serializationDeserializationIO;
 
 import java.io.*;
 import java.util.ArrayList;
