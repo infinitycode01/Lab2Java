@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonSerializationDeserializationIO<T> implements SerializationFormat<T> {
+public class JsonSerializationDeserializationIO<T> implements SerializationDeserializationIO<T> {
 
     private final Gson gson;
     private final Type typeOfT;

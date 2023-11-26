@@ -3,7 +3,7 @@ package com.infinity;
 import java.io.IOException;
 import java.util.List;
 
-public interface SerializationFormat<T> {
+public interface SerializationDeserializationIO<T> {
 
     /**
      * Serialize an object to a string in the corresponding format.

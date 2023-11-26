@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class XmlSerializationDeserializationIO<T> implements SerializationFormat<T> {
+public class XmlSerializationDeserializationIO<T> implements SerializationDeserializationIO<T> {
 
     private final XmlMapper xmlMapper;
     private final Class<T> typeParameterClass;

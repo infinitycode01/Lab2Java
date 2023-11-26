@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class TxtSerializationDeserializationIO<T> implements SerializationFormat<T> {
+public class TxtSerializationDeserializationIO<T> implements SerializationDeserializationIO<T> {
 
     private Function<String, T> deserializer;
 
