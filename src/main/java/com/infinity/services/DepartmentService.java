@@ -3,6 +3,7 @@ package com.infinity.services;
 import com.infinity.Department;
 import com.infinity.DevelopmentDepartment;
 import com.infinity.Employee;
+import com.infinity.interfaces.DepartmentServiceInterface;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,7 +13,7 @@ import java.util.List;
  * Service class for managing a collection of departments in an organization.
  * Provides methods to sort and search departments based on different criteria.
  */
-public class DepartmentService {
+public class DepartmentService implements DepartmentServiceInterface {
     private final List<Department> departments;
 
     /**
@@ -29,6 +30,7 @@ public class DepartmentService {
      *
      * @return A list of departments sorted by name.
      */
+    @Override
     public List<Department> sortDepartmentsByName() {
         departments.sort(Comparator.comparing(Department::getName));
         return departments;
@@ -40,14 +42,13 @@ public class DepartmentService {
      * @param employee The employee to search for in the departments.
      * @return A list of departments that contain the specified employee.
      */
+    @Override
     public List<Department> findDepartmentsByEmployee(Employee employee) {
         List<Department> foundDepartments = new ArrayList<>();
         for (Department department : departments) {
-            if (department instanceof DevelopmentDepartment devDept) {
-                if (devDept.getEmployees().contains(employee)) {
+                if (department.getEmployees().contains(employee)) {
                     foundDepartments.add(department);
                 }
-            }
         }
         return foundDepartments;
     }
@@ -58,14 +59,13 @@ public class DepartmentService {
      * @param employeeCount The threshold number of employees.
      * @return A list of departments that have more than the specified number of employees.
      */
+    @Override
     public List<Department> findDepartmentsWithMoreThan(int employeeCount) {
         List<Department> foundDepartments = new ArrayList<>();
         for (Department department : departments) {
-            if (department instanceof DevelopmentDepartment devDept) {
-                if (devDept.getEmployeeCount() > employeeCount) {
+                if (department.getEmployees().size() > employeeCount) {
                     foundDepartments.add(department);
                 }
-            }
         }
         return foundDepartments;
     }
@@ -75,14 +75,10 @@ public class DepartmentService {
      *
      * @return A list of departments sorted by the number of employees.
      */
+    @Override
     public List<Department> sortDepartmentsByEmployeeCount() {
-        departments.sort((d1, d2) -> {
-            if (d1 instanceof DevelopmentDepartment && d2 instanceof DevelopmentDepartment) {
-                return Integer.compare(((DevelopmentDepartment) d2).getEmployeeCount(),
-                        ((DevelopmentDepartment) d1).getEmployeeCount());
-            }
-            return 0;
-        });
+        departments.sort((d1, d2) -> Integer.compare(((DevelopmentDepartment) d2).getEmployeeCount(),
+                ((DevelopmentDepartment) d1).getEmployeeCount()));
         return departments;
     }
 }

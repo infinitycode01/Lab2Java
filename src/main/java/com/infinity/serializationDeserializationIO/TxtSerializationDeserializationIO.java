@@ -1,5 +1,7 @@
 package com.infinity.serializationDeserializationIO;
 
+import com.infinity.interfaces.SerializationDeserializationIO;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

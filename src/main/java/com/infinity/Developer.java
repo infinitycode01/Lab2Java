@@ -1,13 +1,20 @@
 package com.infinity;
 
+
+import jakarta.validation.constraints.NotBlank;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Represents a developer, extending the Employee class with additional fields for programming languages and current project.
  */
 public class Developer extends Employee {
+    @NotBlank
     private final String[] programmingLanguages;
+    @NotBlank
     private final String currentProject;
 
     /**
@@ -138,7 +145,37 @@ public class Developer extends Employee {
          */
         @Override
         public Developer build() {
+//            super.build();
+//
+//            List<String> validationErrors = new ArrayList<>();
+//
+//            if (name == null || name.trim().isEmpty()) {
+//                validationErrors.add("Name cannot be empty");
+//            }
+//            if (id <= 0) {
+//                validationErrors.add("ID must be positive");
+//            }
+//            if (position == null || position.trim().isEmpty()) {
+//                validationErrors.add("Position cannot be empty");
+//            }
+//            if (salary < 2000) {
+//                validationErrors.add("Salary must be greater than 500");
+//            }
+//
+//            if (programmingLanguages == null || programmingLanguages.length == 0) {
+//                validationErrors.add("Programming languages cannot be empty");
+//            }
+//            if (currentProject == null || currentProject.trim().isEmpty()) {
+//                validationErrors.add("Current project cannot be empty");
+//            }
+//
+//            if (!validationErrors.isEmpty()) {
+//                throw new IllegalArgumentException("Illegal arguments: " + String.join(", ", validationErrors));
+//            }
+
             return new Developer(this);
         }
+
+
     }
 }

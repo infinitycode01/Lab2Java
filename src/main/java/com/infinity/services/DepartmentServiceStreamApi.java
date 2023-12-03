@@ -3,6 +3,7 @@ package com.infinity.services;
 import com.infinity.Department;
 import com.infinity.DevelopmentDepartment;
 import com.infinity.Employee;
+import com.infinity.interfaces.DepartmentServiceInterface;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
  * Service class for managing a collection of departments in an organization.
  * Provides methods to sort and search departments based on different criteria, using Stream API.
  */
-public class DepartmentServiceStreamApi{
+public class DepartmentServiceStreamApi implements DepartmentServiceInterface {
     private final List<Department> departments;
 
     public DepartmentServiceStreamApi(List<Department> departments) {
@@ -24,6 +25,7 @@ public class DepartmentServiceStreamApi{
      *
      * @return A list of departments sorted by name.
      */
+    @Override
     public List<Department> sortDepartmentsByName() {
         return departments.stream()
                 .sorted(Comparator.comparing(Department::getName))
@@ -36,9 +38,9 @@ public class DepartmentServiceStreamApi{
      * @param employee The employee to search for in the departments.
      * @return A list of departments that contain the specified employee.
      */
+    @Override
     public List<Department> findDepartmentsByEmployee(Employee employee) {
         return departments.stream()
-                .filter(department -> department instanceof DevelopmentDepartment)
                 .map(department -> (DevelopmentDepartment) department)
                 .filter(devDept -> devDept.getEmployees().contains(employee))
                 .collect(Collectors.toList());
@@ -50,9 +52,9 @@ public class DepartmentServiceStreamApi{
      * @param employeeCount The threshold number of employees.
      * @return A list of departments that have more than the specified number of employees.
      */
+    @Override
     public List<Department> findDepartmentsWithMoreThan(int employeeCount) {
         return departments.stream()
-                .filter(department -> department instanceof DevelopmentDepartment)
                 .map(department -> (DevelopmentDepartment) department)
                 .filter(devDept -> devDept.getEmployeeCount() > employeeCount)
                 .collect(Collectors.toList());
@@ -63,12 +65,10 @@ public class DepartmentServiceStreamApi{
      *
      * @return A list of departments sorted by the number of employees.
      */
+    @Override
     public List<Department> sortDepartmentsByEmployeeCount() {
         return departments.stream()
-                .filter(department -> department instanceof DevelopmentDepartment)
-                .sorted(Comparator.comparingInt((Department d) -> {
-                    return ((DevelopmentDepartment) d).getEmployeeCount();
-                }).reversed())
+                .sorted(Comparator.comparingInt((Department d) -> ((DevelopmentDepartment) d).getEmployeeCount()).reversed())
                 .collect(Collectors.toList());
     }
 }

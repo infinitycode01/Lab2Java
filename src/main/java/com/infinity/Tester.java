@@ -1,6 +1,8 @@
 package com.infinity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -137,7 +139,37 @@ public class Tester extends Employee {
          */
         @Override
         public Tester build() {
+            List<String> validationErrors = new ArrayList<>();
+
+            //validateEmployeeFields(validationErrors);
+
+            if (typesOfTesting == null || typesOfTesting.length == 0) {
+                validationErrors.add("Programming languages cannot be empty");
+            }
+            if (currentProject == null || currentProject.trim().isEmpty()) {
+                validationErrors.add("Current project cannot be empty");
+            }
+
+            if (!validationErrors.isEmpty()) {
+                throw new IllegalArgumentException("Illegal arguments: " + String.join(", ", validationErrors));
+            }
+
             return new Tester(this);
         }
+
+//        private void validateEmployeeFields(List<String> errors) {
+//            if (getName() == null || getName().trim().isEmpty()) {
+//                errors.add("Name cannot be empty");
+//            }
+//            if (getId() <= 0) {
+//                errors.add("ID must be positive");
+//            }
+//            if (getPosition() == null || getPosition().trim().isEmpty()) {
+//                errors.add("Position cannot be empty");
+//            }
+//            if (getSalary() < 500) {
+//                errors.add("Salary must be greater than 500");
+//            }
+//        }
     }
 }

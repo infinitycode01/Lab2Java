@@ -1,6 +1,7 @@
 package com.infinity.serializationDeserializationIO;
 
 import com.google.gson.*;
+import com.infinity.interfaces.SerializationDeserializationIO;
 
 import java.io.FileReader;
 import java.io.FileWriter;

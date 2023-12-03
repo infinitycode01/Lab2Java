@@ -1,4 +1,4 @@
-package com.infinity.serializationDeserializationIO;
+package com.infinity.interfaces;
 
 import java.io.IOException;
 import java.util.List;

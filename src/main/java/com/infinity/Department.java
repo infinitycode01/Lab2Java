@@ -1,10 +1,19 @@
 package com.infinity;
 
+
+
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
+
 /**
  * Represents an abstract base class for different departments within a company.
  */
-public abstract class Department {
+public abstract class Department implements Comparable<Department> {
+    @NotNull
     private final String name;
+
+    protected List<Employee> employees;
 
     /**
      * Constructs a Department instance with the specified attributes.
@@ -27,6 +36,15 @@ public abstract class Department {
      */
     public String getName() {
         return name;
+    }
+
+    public List<Employee> getEmployees(){
+        return employees;
+    }
+
+    @Override
+    public int compareTo(Department department){
+        return employees.size() - department.employees.size();
     }
 
     /**

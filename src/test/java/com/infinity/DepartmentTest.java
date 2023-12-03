@@ -16,7 +16,7 @@ public class DepartmentTest {
                 .setCurrentProject("Project X")
                 .build();
 
-        Tester test1 = new Tester.Builder("Dima", 3, "Junior QA Engeenier", 600.0)
+        Tester test1 = new Tester.Builder("Dima", 3, "Junior QA Engineer", 600.0)
                 .setTypesOfTesting(new String[]{"Manual"})
                 .setCurrentProject("Project X")
                 .build();

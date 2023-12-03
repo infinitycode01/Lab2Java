@@ -1,6 +1,7 @@
 package com.infinity.serializationDeserializationIO;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.infinity.interfaces.SerializationDeserializationIO;
 
 import java.io.File;
 import java.io.IOException;

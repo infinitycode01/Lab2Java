@@ -17,4 +17,12 @@ public class DeveloperTest {
         Assert.assertEquals(developer1.getProgrammingLanguages(), new String[]{"Java", "C++"});
         Assert.assertEquals(developer1.getCurrentProject(), "Project X");
     }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testDeveloperCreationWithInvalidData() {
+        new Developer.Builder("", -1, "", -500)
+                .setProgrammingLanguages(new String[]{})
+                .setCurrentProject(" ")
+                .build();
+    }
 }

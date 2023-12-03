@@ -1,15 +1,23 @@
 package com.infinity;
 
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Represents an employee with specific attributes like name, ID, position, and salary.
  */
 public class Employee {
-    private String name;
-    private int id;
-    private String position;
-    private double salary;
+    protected String name;
+    protected int id;
+    protected String position;
+    protected double salary;
 
 
     public Employee() {
@@ -116,9 +124,7 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id == employee.id &&
-                Double.compare(employee.salary, salary) == 0 &&
-                name.equals(employee.name) &&
+        return name.equals(employee.name) &&
                 position.equals(employee.position);
     }
 
@@ -129,17 +135,41 @@ public class Employee {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, id, position, salary);
+        return Objects.hash(name, position);
     }
 
     /**
      * Builder class for creating Employee objects.
      */
     public static class Builder {
-        private final String name;
-        private final int id;
-        private final String position;
-        private final double salary;
+        @NotBlank(message = "Name cannot be empty")
+        protected String name;
+        @Min(value = 1, message = "ID must be positive")
+        protected int id;
+        @NotBlank(message = "Position cannot be empty")
+        protected String position;
+        @Min(value = 500, message = "Salary must be greater than 500")
+        protected double salary;
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setPosition(String position) {
+            this.position = position;
+            return this;
+        }
+
+        public Builder setSalary(double salary) {
+            this.salary = salary;
+            return this;
+        }
 
         /**
          * Creates a Builder instance for the Employee class with mandatory fields.
@@ -155,13 +185,7 @@ public class Employee {
             this.position = position;
             this.salary = salary;
         }
-//        public Builder setId(int id) {
-//            if (id < 0) {
-//                throw new IllegalArgumentException("Id cannot be negative.");
-//            }
-//            this.id = id;
-//            return this;
-//        }
+
 
         /**
          * Creates an Employee object using the current state of the Builder.
@@ -169,6 +193,17 @@ public class Employee {
          * @return A new Employee object.
          */
         public Employee build() {
+            Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+            Set<ConstraintViolation<Builder>> violations = validator.validate(this);
+
+            if (!violations.isEmpty()) {
+                StringBuilder sb = new StringBuilder();
+                for (ConstraintViolation<Builder> violation : violations) {
+                    sb.append(violation.getPropertyPath()).append(": ").append(violation.getMessage()).append("\n");
+                }
+                throw new IllegalArgumentException("Invalid fields: \n" + sb.toString());
+            }
+
             return new Employee(this);
         }
     }

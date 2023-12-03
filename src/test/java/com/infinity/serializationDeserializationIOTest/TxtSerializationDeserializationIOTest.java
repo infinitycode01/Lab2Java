@@ -42,16 +42,18 @@ public class TxtSerializationDeserializationIOTest {
     public void testWriteToFileAndReadFromFile() throws IOException {
         List<Employee> employees = Arrays.asList(
                 new Employee.Builder("Dima1", 2, "Java Middle", 2000).build(),
-                new Employee.Builder("Dima2", 3, "Java Senior", 5000).build()
+                new Employee.Builder("Albert", 3, "Java Senior", 5000).build(),
+                new Employee.Builder("Dima3", 4, "Java Junior", 1000).build()
         );
         format.writeToFile(employees, testFilePath);
 
         Assert.assertTrue(Files.exists(Paths.get(testFilePath)));
 
         List<Employee> readEmployees = format.readFromFile(testFilePath);
+
         Assert.assertNotNull(readEmployees);
-        Assert.assertEquals(readEmployees.size(), 2);
+        Assert.assertEquals(readEmployees.size(), 3);
         Assert.assertEquals(readEmployees.get(0).getName(), "Dima1");
-        Assert.assertEquals(readEmployees.get(1).getName(), "Dima2");
+        Assert.assertEquals(readEmployees.get(1).getName(), "Albert");
     }
 }
