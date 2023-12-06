@@ -14,9 +14,13 @@ import java.util.Set;
  * Represents an employee with specific attributes like name, ID, position, and salary.
  */
 public class Employee {
+    @NotBlank(message = "Name cannot be empty")
     protected String name;
+    @Min(value = 1, message = "ID must be positive")
     protected int id;
+    @NotBlank(message = "Position cannot be empty")
     protected String position;
+    @Min(value = 500, message = "Salary must be greater than 500")
     protected double salary;
 
 
@@ -27,27 +31,72 @@ public class Employee {
      *
      * @param builder The Builder object containing the data to initialize the Employee object.
      */
-    public Employee(Builder builder) {
+    protected Employee(Builder builder) {
         this.name = builder.name;
         this.id = builder.id;
         this.position = builder.position;
         this.salary = builder.salary;
     }
 
+
     public void setName(String name) {
         this.name = name;
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Employee>> violations = validator.validate(this);
+
+        if (!violations.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ConstraintViolation<Employee> violation : violations) {
+                sb.append(violation.getPropertyPath()).append(": ").append(violation.getMessage()).append("\n");
+            }
+            throw new IllegalArgumentException("Invalid fields: \n" + sb.toString());
+        }
     }
 
     public void setId(int id) {
         this.id = id;
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Employee>> violations = validator.validate(this);
+
+        if (!violations.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ConstraintViolation<Employee> violation : violations) {
+                sb.append(violation.getPropertyPath()).append(": ").append(violation.getMessage()).append("\n");
+            }
+            throw new IllegalArgumentException("Invalid fields: \n" + sb.toString());
+        }
     }
 
     public void setPosition(String position) {
         this.position = position;
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Employee>> violations = validator.validate(this);
+
+        if (!violations.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ConstraintViolation<Employee> violation : violations) {
+                sb.append(violation.getPropertyPath()).append(": ").append(violation.getMessage()).append("\n");
+            }
+            throw new IllegalArgumentException("Invalid fields: \n" + sb.toString());
+        }
     }
 
     public void setSalary(double salary) {
         this.salary = salary;
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Employee>> violations = validator.validate(this);
+
+        if (!violations.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ConstraintViolation<Employee> violation : violations) {
+                sb.append(violation.getPropertyPath()).append(": ").append(violation.getMessage()).append("\n");
+            }
+            throw new IllegalArgumentException("Invalid fields: \n" + sb.toString());
+        }
     }
 
 
@@ -142,13 +191,10 @@ public class Employee {
      * Builder class for creating Employee objects.
      */
     public static class Builder {
-        @NotBlank(message = "Name cannot be empty")
+
         protected String name;
-        @Min(value = 1, message = "ID must be positive")
         protected int id;
-        @NotBlank(message = "Position cannot be empty")
         protected String position;
-        @Min(value = 500, message = "Salary must be greater than 500")
         protected double salary;
 
         public Builder setName(String name) {
@@ -186,25 +232,20 @@ public class Employee {
             this.salary = salary;
         }
 
-
-        /**
-         * Creates an Employee object using the current state of the Builder.
-         *
-         * @return A new Employee object.
-         */
         public Employee build() {
+            Employee empl = new Employee(this);
             Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-            Set<ConstraintViolation<Builder>> violations = validator.validate(this);
+            Set<ConstraintViolation<Employee>> violations = validator.validate(empl);
 
             if (!violations.isEmpty()) {
                 StringBuilder sb = new StringBuilder();
-                for (ConstraintViolation<Builder> violation : violations) {
+                for (ConstraintViolation<Employee> violation : violations) {
                     sb.append(violation.getPropertyPath()).append(": ").append(violation.getMessage()).append("\n");
                 }
                 throw new IllegalArgumentException("Invalid fields: \n" + sb.toString());
             }
 
-            return new Employee(this);
+            return empl;
         }
     }
 }
