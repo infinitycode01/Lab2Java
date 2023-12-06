@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class EmployeeValidationTest {
 
-    @Test
+    @Test//f
     public void testValidEmployee() {
         Employee.Builder builder = new Employee.Builder("dima", 123, "Developer", 1000.0);
         Employee employee = builder.build();
